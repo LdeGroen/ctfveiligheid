@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ctfveiligheid/static/css/main.384d9424.css",
+    "main.js": "/ctfveiligheid/static/js/main.36f64344.js",
+    "static/js/453.5cb16a92.chunk.js": "/ctfveiligheid/static/js/453.5cb16a92.chunk.js",
+    "index.html": "/ctfveiligheid/index.html",
+    "main.384d9424.css.map": "/ctfveiligheid/static/css/main.384d9424.css.map",
+    "main.36f64344.js.map": "/ctfveiligheid/static/js/main.36f64344.js.map",
+    "453.5cb16a92.chunk.js.map": "/ctfveiligheid/static/js/453.5cb16a92.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.384d9424.css",
+    "static/js/main.36f64344.js"
+  ]
+}
