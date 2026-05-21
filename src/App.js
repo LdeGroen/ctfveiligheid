@@ -1,4 +1,4 @@
-﻿import React, { useState, createContext, useContext } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 import { Client, Databases, ID } from './appwriteShim';
 
 // --- Appwrite Configuratie ---
@@ -41,7 +41,7 @@ const translations = {
         errorTitle: "Oeps, er ging iets mis.",
         errorMessage: "Het is niet gelukt om je melding te versturen. Probeer het later opnieuw of neem direct contact met ons op.",
         backToHome: "Terug naar de startpagina",
-        imageAlt: "Sfeerbeeld van het CafÃ© Theater Festival"
+        imageAlt: "Sfeerbeeld van het Café Theater Festival"
     },
     en: {
         safety: "Safety",
@@ -63,7 +63,7 @@ const translations = {
         errorTitle: "Oops, something went wrong.",
         errorMessage: "We were unable to submit your report. Please try again later or contact us directly.",
         backToHome: "Back to the homepage",
-        imageAlt: "Atmosphere picture of the CafÃ© Theater Festival"
+        imageAlt: "Atmosphere picture of the Café Theater Festival"
     }
 };
 
