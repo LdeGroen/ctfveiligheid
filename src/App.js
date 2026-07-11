@@ -1,5 +1,5 @@
 import React, { useState, createContext, useContext } from 'react';
-import { Client, Databases, ID } from 'appwrite';
+import { Client, Databases, ID } from './appwriteShim';
 
 // --- Appwrite Configuratie ---
 const APPWRITE_ENDPOINT = 'https://cloud.appwrite.io/v1';
