@@ -110,7 +110,7 @@ const LandingPage = ({ onGoToForm }) => {
             <p className="text-base sm:text-lg leading-relaxed mb-8 text-gray-200">{t('landingIntro')}</p>
             <div className="mb-8 overflow-hidden rounded-xl shadow-lg">
                 <img 
-                    src="https://pub-36abfb48eca14eb8b366a0211191ef0e.r2.dev/legacy/53562360999_e4668b6c7f_o-scaled-kopie.jpg" 
+                    src="https://pub-36abfb48eca14eb8b366a0211191ef0e.r2.dev/toegankelijkheid/5TKnDrWp0dW5ftg5nJ5zl9zgU98Tvhv2.jpg"
                     alt={t('imageAlt')}
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                     onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/600x400/20747F/FFFFFF?text=CTF+Festival'; }}
