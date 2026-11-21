@@ -39,7 +39,9 @@ const translations = {
         successTitle: "Dank je wel!",
         successMessage: "Je melding is succesvol en veilig ontvangen. We nemen deze zeer serieus.",
         errorTitle: "Oeps, er ging iets mis.",
-        errorMessage: "Het is niet gelukt om je melding te versturen. Probeer het later opnieuw of neem direct contact met ons op.",
+        errorMessage: "Het is niet gelukt om je melding te versturen. Je tekst staat er nog: probeer het zo opnieuw, of neem direct contact met ons op.",
+        tooLong: "Je melding is te lang. Maak hem iets korter, of zet de rest in een tweede melding.",
+        charsLeft: "tekens over",
         backToHome: "Terug naar de startpagina",
         imageAlt: "Sfeerbeeld van het Café Theater Festival"
     },
@@ -61,7 +63,9 @@ const translations = {
         successTitle: "Thank you!",
         successMessage: "Your report has been received successfully and safely. We take it very seriously.",
         errorTitle: "Oops, something went wrong.",
-        errorMessage: "We were unable to submit your report. Please try again later or contact us directly.",
+        errorMessage: "We were unable to submit your report. Your text is still here: please try again shortly, or contact us directly.",
+        tooLong: "Your report is too long. Please shorten it, or put the rest in a second report.",
+        charsLeft: "characters left",
         backToHome: "Back to the homepage",
         imageAlt: "Atmosphere picture of the Café Theater Festival"
     }
@@ -126,6 +130,10 @@ const LandingPage = ({ onGoToForm }) => {
     );
 };
 
+// Zelfde grens als de backend (Event max:5000). Daarboven gaf het een 422
+// en was je tekst weg (audit FRM-16).
+const MAX_TEKENS = 5000;
+
 const SafetyForm = ({ onGoToLanding }) => {
     const { t } = useTranslation();
     const [formData, setFormData] = useState({
@@ -163,11 +171,11 @@ const SafetyForm = ({ onGoToLanding }) => {
         }
     };
 
-    if (status === 'success' || status === 'error') {
+    if (status === 'success') {
         return (
             <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 text-center animate-fade-in">
-                <h2 className="text-3xl font-bold mb-4">{t(status === 'success' ? 'successTitle' : 'errorTitle')}</h2>
-                <p className="text-lg mb-6">{t(status === 'success' ? 'successMessage' : 'errorMessage')}</p>
+                <h2 className="text-3xl font-bold mb-4">{t('successTitle')}</h2>
+                <p className="text-lg mb-6">{t('successMessage')}</p>
                 <button
                     onClick={onGoToLanding}
                     className="w-full sm:w-auto bg-cyan-400 hover:bg-cyan-300 text-[#20747F] font-bold py-3 px-8 rounded-full text-lg transition-all duration-300"
@@ -181,6 +189,12 @@ const SafetyForm = ({ onGoToLanding }) => {
     return (
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 animate-fade-in">
             <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-center text-cyan-200">{t('formTitle')}</h1>
+            {status === 'error' && (
+                <div role="alert" className="mb-6 rounded-lg border-2 border-red-300 bg-red-500/20 p-4 text-white">
+                    <p className="font-bold">{t('errorTitle')}</p>
+                    <p className="text-sm">{t('errorMessage')}</p>
+                </div>
+            )}
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                     <label htmlFor="Naam" className="block text-sm font-medium text-gray-200 mb-1">{t('nameLabel')}</label>
@@ -196,7 +210,12 @@ const SafetyForm = ({ onGoToLanding }) => {
                 </div>
                 <div>
                     <label htmlFor="Event" className="block text-sm font-medium text-gray-200 mb-1">{t('eventLabel')}</label>
-                    <textarea name="Event" id="Event" rows="6" value={formData.Event} onChange={handleChange} required className="w-full bg-white/10 border-2 border-transparent focus:border-cyan-400 rounded-lg p-3 text-white placeholder-gray-400 focus:outline-none focus:ring-0 transition-all duration-300" placeholder={t('eventPlaceholder')}></textarea>
+                    <textarea name="Event" id="Event" rows="6" maxLength={MAX_TEKENS} value={formData.Event} onChange={handleChange} required className="w-full bg-white/10 border-2 border-transparent focus:border-cyan-400 rounded-lg p-3 text-white placeholder-gray-400 focus:outline-none focus:ring-0 transition-all duration-300" placeholder={t('eventPlaceholder')}></textarea>
+                    {formData.Event.length > MAX_TEKENS - 500 && (
+                        <p className={`text-xs mt-1 text-right ${formData.Event.length >= MAX_TEKENS ? 'text-red-300 font-bold' : 'text-gray-300'}`}>
+                            {formData.Event.length >= MAX_TEKENS ? t('tooLong') : `${MAX_TEKENS - formData.Event.length} ${t('charsLeft')}`}
+                        </p>
+                    )}
                 </div>
                 <div className="flex items-center justify-between gap-4">
                     <span className="text-sm font-medium text-gray-200">{t('contactQuestion')}</span>
