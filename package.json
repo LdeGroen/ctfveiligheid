@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "ctf-ui": "github:LdeGroen/ctf-ui#v0.1.0",
+    "ctf-ui": "github:LdeGroen/ctf-ui#v0.7.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
